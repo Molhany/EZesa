@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Bills{% endblock %}
+
+{% block content %}
+<h1>Your Bills</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Date Issued</th>
+            <th>Due Date</th>
+            <th>Usage (kWh)</th>
+            <th>Total Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bill in bills %}
+        <tr>
+            <td>{{ bill.date_issued }}</td>
+            <td>{{ bill.due_date }}</td>
+            <td>{{ bill.usage_kwh }}</td>
+            <td>${{ bill.total_amount }}</td>
+            <td><a href="{% url 'bill_detail' bill.id %}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

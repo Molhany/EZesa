@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Personalized Recommendations{% endblock %}
+
+{% block content %}
+<h1>Personalized Recommendations</h1>
+<ul>
+    {% for recommendation in recommendations %}
+    <li>{{ recommendation }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

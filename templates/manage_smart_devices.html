@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Manage Smart Devices{% endblock %}
+
+{% block content %}
+<h1>Manage Smart Devices</h1>
+
+<!-- Device Input Form -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Device</button>
+</form>
+
+<!-- Existing Devices -->
+<h2>Existing Devices</h2>
+<ul>
+    {% for device in devices %}
+    <li>
+        <strong>{{ device.device_name }} ({{ device.device_type }})</strong>
+        <p>Status: {{ device.status }}</p>
+        <p>Energy Consumption: {{ device.energy_consumption }} kWh</p>
+        <p>Energy Balance: {{ device.energy_balance }} kWh available</p>
+        <p>Last Updated: {{ device.last_updated }}</p>
+        <form method="post" action="{% url 'update_device_status' device.id %}">
+            {% csrf_token %}
+            <button type="submit" name="status" value="on">Turn On</button>
+            <button type="submit" name="status" value="off">Turn Off</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

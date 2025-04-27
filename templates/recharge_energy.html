@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Recharge Energy{% endblock %}
+
+{% block content %}
+<h1>Recharge Energy</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Recharge Energy</button>
+</form>
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

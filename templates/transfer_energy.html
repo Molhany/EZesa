@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Transfer Energy{% endblock %}
+
+{% block content %}
+<h1>Transfer Energy</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+        <h4>Recipient Information</h4>
+        <p>First Name: <span id="recipient-first-name"></span></p>
+        <p>Surname: <span id="recipient-surname">-</span></p>
+        <p>Address: <span id="recipient-address">-</span></p>
+    </div>
+    <button type="submit">Transfer Energy</button>
+</form>
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
+<script>
+    const meterNumberInput = document.querySelector('input[name="recipient_meter_number"]');
+    meterNumberInput.addEventListener('input', function() {
+        const meterNumber = this.value;
+        if (meterNumber.length === 0) {
+            document.getElementById('recipient-first-name').textContent = '-';
+            document.getElementById('recipient-surname').textContent = '-';
+            document.getElementById('recipient-address').textContent = '-';
+        } else {
+            fetch(`/users/recipient_info/${meterNumber}/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('recipient-first-name').textContent = data.first_name || '-';
+                    document.getElementById('recipient-surname').textContent = data.surname || '-';
+                    document.getElementById('recipient-address').textContent = data.address || '-';
+                });
+        }
+    });
+</script>

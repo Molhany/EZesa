@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Billing and Payments{% endblock %}
+
+{% block content %}
+<h1>Billing and Payments</h1>
+
+<h2>Bills</h2>
+<ul>
+    {% for bill in bills %}
+    <li>{{ bill.date_issued }} - {{ bill.amount_due }} USD</li>
+    {% endfor %}
+</ul>
+
+<h2>Payment History</h2>
+<ul>
+    {% for payment in payments %}
+    <li>{{ payment.date }} - {{ payment.amount }} USD</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

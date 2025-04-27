@@ -1,0 +1,15 @@
+
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Send Notification to All Selected Users</h1>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="message">Notification Message:</label>
+        <textarea name="message" id="message" rows="5" cols="60"></textarea>
+    </div>
+    <div>
+        <input type="submit" name="apply" value="Send Notification">
+    </div>
+</form>
+{% endblock %}

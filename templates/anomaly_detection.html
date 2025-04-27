@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Anomaly Detection{% endblock %}
+
+{% block content %}
+<h1>Anomaly Detection</h1>
+<p>Detected anomalies in energy usage on the following dates:</p>
+<ul>
+    {% for date in anomaly_dates %}
+    <li>{{ date }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

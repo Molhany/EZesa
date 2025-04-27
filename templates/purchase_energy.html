@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Purchase Energy{% endblock %}
+
+{% block content %}
+<h1>Purchase Energy</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id="energy-details">
+        <h3>Energy Details</h3>
+        <p>Amount Spent: $<span id="amount-spent">0.00</span></p>
+        <p>Energy to be Purchased: <span id="energy-purchased">0.00</span> kWh</p>
+        <!-- Add additional charges if necessary -->
+    </div>
+    <button type="submit">Purchase Energy</button>
+</form>
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+<script>
+    const amountSpentInput = document.querySelector('input[name="amount_spent"]');
+    const tariffRate = {{ user.bill_set.first.tariff_rate|floatformat:2 }};
+    const amountSpentDisplay = document.getElementById('amount-spent');
+    const energyPurchasedDisplay = document.getElementById('energy-purchased');
+
+    amountSpentInput.addEventListener('input', function() {
+        const amountSpent = parseFloat(this.value) || 0;
+        const energyPurchased = amountSpent / tariffRate;
+        amountSpentDisplay.textContent = amountSpent.toFixed(2);
+        energyPurchasedDisplay.textContent = energyPurchased.toFixed(2);
+    });
+</script>
+{% endblock %}

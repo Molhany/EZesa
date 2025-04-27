@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Energy Usage Analytics{% endblock %}
+
+{% block content %}
+<h1>Energy Usage Analytics</h1>
+<div>
+    <img src="{{ data_uri }}" alt="Energy Usage Patterns">
+</div>
+<p>Average Daily Usage: {{ avg_daily_usage }} kWh</p>
+<p>Average Weekly Usage: {{ avg_weekly_usage }} kWh</p>
+<p>Average Monthly Usage: {{ avg_monthly_usage }} kWh</p>
+{% endblock %}

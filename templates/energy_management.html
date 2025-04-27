@@ -1,0 +1,89 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Energy Management{% endblock %}
+
+{% block content %}
+<h1>Energy Management</h1>
+
+<h2>Energy Transactions</h2>
+<ul>
+    {% for transaction in transactions %}
+    <li>{{ transaction.date_purchased }} - {{ transaction.amount_kwh }} kWh</li>
+    {% endfor %}
+</ul>
+
+<h2>Smart Devices</h2>
+<ul>
+    {% for device in devices %}
+    <li>{{ device.device_name }} ({{ device.device_type }}), Status: {{ device.status }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Usage History</h2>
+<div>
+    <canvas id="usageHistoryChart"></canvas>
+</div>
+
+<h2>Predictive Energy Forecasting</h2>
+<ul>
+    {% for prediction in predictions %}
+    <li>Predicted Usage: {{ prediction }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Anomaly Detection</h2>
+<ul>
+    {% for anomaly in anomalies %}
+    <li>Anomaly Date: {{ anomaly }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Personalized Recommendations</h2>
+<ul>
+    {% for recommendation in recommendations %}
+    <li>{{ recommendation }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var ctx = document.getElementById('usageHistoryChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for date in daily_usage.index %}
+                    "{{ date }}",
+                {% endfor %}
+            ],
+            datasets: [{
+                label: 'Daily Usage (kWh)',
+                data: [
+                    {% for usage in daily_usage.amount_kwh %}
+                        {{ usage }},
+                    {% endfor %}
+                ],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        displayFormats: {
+                            day: 'MMM D'
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

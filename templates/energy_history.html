@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Energy History{% endblock %}
+
+{% block content %}
+<h1>Energy History</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Voucher Code</th>
+            <th>Date Purchased</th>
+            <th>Amount (kWh)</th>
+            <th>Balance (kWh)</th>
+            <th>Transferred To</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for energy in energy_transactions %}
+        <tr>
+            <td>{{ energy.voucher_code }}</td>
+            <td>{{ energy.date_purchased }}</td>
+            <td>{{ energy.amount_kwh }}</td>
+            <td>{{ energy.balance_kwh }}</td>
+            <td>{% if energy.transferred_to %} {{ energy.transferred_to.meter_number }} {% else %} - {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

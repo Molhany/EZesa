@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Bill Details{% endblock %}
+
+{% block content %}
+<h1>Bill Details</h1>
+<p><strong>Date Issued:</strong> {{ bill.date_issued }}</p>
+<p><strong>Due Date:</strong> {{ bill.due_date }}</p>
+<p><strong>Usage (kWh):</strong> {{ bill.usage_kwh }}</p>
+<p><strong>Tariff Rate:</strong> ${{ bill.tariff_rate }}</p>
+<p><strong>Total Amount:</strong> ${{ bill.total_amount }}</p>
+<a href="{% url 'bill_list' %}">Back to Bills</a>
+{% endblock %}

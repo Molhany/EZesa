@@ -1,0 +1,510 @@
+
+/* static/css/styles.css */
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 1rem;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #ff9800;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+aside.sidebar {
+    width: 250px;
+    background-color: #444;
+    color: #fff;
+    padding: 1rem;
+}
+
+aside.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+aside.sidebar ul li {
+    margin-bottom: 1rem;
+}
+
+aside.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+aside.sidebar ul li a:hover {
+    background-color: #ff9800;
+}
+
+main.main-content {
+    flex: 1;
+    padding: 1rem;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+/* Form Styles */
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+form input,
+form textarea,
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #ff9800;
+    outline: none;
+}
+
+form button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #ff9800;
+}
+
+/* Messages */
+.messages {
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 0.75rem;
+    border-radius: 4px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.messages div {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+}
+
+.messages .success {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.messages .error {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+table th,
+table td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #ffecb3;
+}
+
+/* Dashboard Overview Styles */
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.overview-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.overview-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.overview-item h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ff9800;
+    padding-bottom: 0.5rem;
+}
+
+.overview-item p,
+.overview-item ul {
+    font-size: 1rem;
+    color: #666;
+}
+
+.overview-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.overview-item ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+    .header-left, .header-right {
+        margin-bottom: 1rem;
+    }
+    .container {
+        flex-direction: column;
+    }
+    aside.sidebar {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+
+
+
+
+
+
+.sidebar {
+    flex: 0 0 250px;
+    background-color: #ebe0e0;
+    padding: 20px;
+    position: fixed;
+    top: 60px; /* Adjust for fixed header */
+    bottom: 0;
+    overflow-y: auto;
+    color: white;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 270px; /* Adjust for sidebar width */
+    padding: 20px;
+    margin-top: 40px;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left .logo {
+    font-size: 24px;
+}
+
+.header-right ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-right ul li {
+    margin-left: 20px;
+}
+
+.header-right ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+/* Dashboard styles */
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dashboard-item {
+    flex: 1 1 calc(50% - 20px);
+    margin: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-item h2 {
+    margin-top: 0;
+}
+
+.notification-list, .energy-list, .visualization {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Energy Management styles */
+.energy-management-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.energy-management-item {
+    flex: 1 1 100%;
+    margin: 10px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.energy-management-item h2 {
+    margin-top: 0;
+}
+
+/* Billing and Payments styles */
+.billing-payments-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.billing-payments-item {
+    flex: 1 1 100%;
+    margin: 10px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.billing-payments-item h2 {
+    margin-top: 0;
+}
+
+/* Support & FAQ styles */
+.support-faq-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.support-faq-item {
+    flex: 1 1 100%;
+    margin: 10px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.support-faq-item h2 {
+    margin-top: 0;
+}
+
+.chatbot-section {
+    margin-top: 20px;
+}
+
+/* Profile styles */
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile-item {
+    flex: 1 1 100%;
+    margin: 10px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-item h2 {
+    margin-top: 0;
+}
+
+/* Settings styles */
+.settings-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.settings-item {
+    flex: 1 1 100%;
+    margin: 10px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.settings-item h2 {
+    margin-top: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        top: 0;
+        height: auto;
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+.dashboard-item, .energy-management-item, .billing-payments-item, .support-faq-item, .profile-item, .settings-item {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-right ul li {
+        margin-left: 10px;
+    }
+
+    .header-right ul li a {
+        font-size: 14px;
+    }
+
+    .sidebar ul li a {
+        font-size: 14px;
+    }
+}

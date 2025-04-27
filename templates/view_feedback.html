@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+
+{% block title %}View Feedback{% endblock %}
+
+{% block content %}
+<h1>View Feedback</h1>
+<ul>
+    {% for feedback in feedback_list %}
+    <li>
+        <strong>{{ feedback.user.username }} - {{ feedback.feedback_type }} - {{ feedback.rating }} stars</strong>
+        <p>{{ feedback.feedback_text }}</p>
+        <p><em>{{ feedback.date_submitted }}</em></p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

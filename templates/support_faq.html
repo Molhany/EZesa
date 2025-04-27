@@ -1,0 +1,92 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Support & FAQ{% endblock %}
+
+{% block content %}
+<h1>Support & FAQ</h1>
+
+<!-- FAQ Section -->
+<div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <ul>
+        {% for faq in faq_content %}
+        <li>
+            <strong>{{ faq.question }}</strong>
+            <p>{{ faq.answer }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Contact Support Form -->
+<div class="support-form">
+    <h2>Contact Support</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+<!-- Chatbot Section -->
+<div class="chatbot-section">
+    <h2>Chat with EZesa Chatbot</h2>
+    <div id="chatbot-messages"></div>
+    <input type="text" id="chatbot-input" placeholder="Type your message here...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<!-- Live Chat Section -->
+<div class="live-chat-section">
+    <h2>Live Chat</h2>
+    <p>Live chat feature coming soon.</p>
+</div>
+
+<!-- Tutorials Section -->
+<div class="tutorials-section">
+    <h2>Tutorials</h2>
+    <div class="tutorial-container">
+        <ul>
+            {% for tutorial in tutorials %}
+            <li>
+                <h3>{{ tutorial.title }}</h3>
+                <p>{{ tutorial.description }}</p>
+                <video controls>
+                    <source src="{{ tutorial.video_file.url }}" type="video/mp4">
+                </video>
+            </li>
+            {% empty %}
+            <li>No tutorials available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<script>
+    function sendMessage() {
+        var input = document.getElementById("chatbot-input").value;
+        fetch("/chatbot", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ "message": input })
+        }).then(response => response.json()).then(data => {
+            var messages = document.getElementById("chatbot-messages");
+            messages.innerHTML += "<p><strong>You:</strong> " + input + "</p>";
+            messages.innerHTML += "<p><strong>Chatbot:</strong> " + data.response + "</p>";
+            document.getElementById("chatbot-input").value = "";
+        });
+    }
+</script>
+{% endblock %}

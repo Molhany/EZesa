@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Notification Detail{% endblock %}
+
+{% block content %}
+<h1>Notification Detail</h1>
+<p>{{ notification.message }}</p>
+<p>{{ notification.date_created }}</p>
+{% if not notification.is_read %}
+    <a href="{% url 'mark_notification_as_read' notification.id %}">Mark as read</a>
+{% endif %}
+{% endblock %}

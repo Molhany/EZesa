@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Detailed Usage Reports{% endblock %}
+
+{% block content %}
+<h1>Detailed Usage Reports</h1>
+<h2>Daily Usage</h2>
+<ul>
+    {% for date, usage in comparison_report.daily.items %}
+    <li>{{ date }}: {{ usage.amount_kwh }} kWh</li>
+    {% endfor %}
+</ul>
+
+<h2>Weekly Usage</h2>
+<ul>
+    {% for date, usage in comparison_report.weekly.items %}
+    <li>{{ date }}: {{ usage.amount_kwh }} kWh</li>
+    {% endfor %}
+</ul>
+
+<h2>Monthly Usage</h2>
+<ul>
+    {% for date, usage in comparison_report.monthly.items %}
+    <li>{{ date }}: {{ usage.amount_kwh }} kWh</li>
+    {% endfor %}
+</ul>
+{% endblock %}

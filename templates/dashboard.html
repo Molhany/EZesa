@@ -1,0 +1,118 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Dashboard, {{ username }}!</h1>
+
+<div class="dashboard-overview">
+    <div class="overview-item">
+        <h2>Current Balance</h2>
+        <p>Balance: {{ energy_balance }} kWh</p>
+        <p style="color: {{ energy_status }};">Energy Status: 
+            {% if energy_status == 'green' %}Green{% elif energy_status == 'orange' %}Orange{% else %}Red{% endif %}
+        </p>
+        <p>Estimated Days Left: {{ days_left|floatformat:1 }} days</p>
+    </div>
+    <div class="overview-item">
+        <h2>Buy Energy</h2>
+        <a href="{% url 'purchase_energy' %}">Purchase Energy</a>
+        <a href="{% url 'recharge_energy' %}">Recharge Energy</a>
+    </div>
+    <div class="overview-item">
+        <h2>Recent Activities</h2>
+        <ul>
+            {% for activity in recent_activities %}
+                <li>{{ activity.date_purchased }}: {{ activity.amount_kwh }} kWh ({{ activity.voucher_code }})</li>
+            {% empty %}
+                <li>No recent activities.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="overview-item">
+        <h2>Manage Your Power Usage</h2>
+        <p>Monitor and manage your power usage to stay efficient.</p>
+    </div>
+    <div class="overview-item">
+        <h2>Weather Updates</h2>
+        <p>Weather updates will be displayed here.</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="dashboard-container">
+    <div class="dashboard-item">
+        <h2>Current Balance</h2>
+        <p>Your current balance is ${{ current_balance }}</p>
+    </div>
+    <div class="dashboard-item">
+        <h2>Data Visualization</h2>
+        <div class="visualization">
+            <canvas id="usageHistoryChart"></canvas>
+        </div>
+    </div>
+    <div class="dashboard-item">
+        <h2>Recent Notifications</h2>
+        <ul class="notification-list">
+            {% for notification in notifications %}
+            <li>{{ notification.date_created }} - {{ notification.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="dashboard-item">
+        <h2>Recent Energy Transactions</h2>
+        <ul class="energy-list">
+            {% for energy in recent_energy_data %}
+            <li>{{ energy.date_purchased }} - {{ energy.amount_kwh }} kWh</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var ctx = document.getElementById('usageHistoryChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for date in daily_usage.index %}
+                    "{{ date }}",
+                {% endfor %}
+            ],
+            datasets: [{
+                label: 'Daily Usage (kWh)',
+                data: [
+                    {% for usage in daily_usage.amount_kwh %}
+                        {{ usage }},
+                    {% endfor %}
+                ],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        displayFormats: {
+                            day: 'MMM D'
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

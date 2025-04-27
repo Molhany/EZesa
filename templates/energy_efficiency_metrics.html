@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Energy Efficiency Metrics{% endblock %}
+
+{% block content %}
+<h1>Energy Efficiency Metrics</h1>
+<p>Average Daily Usage: {{ avg_daily_usage }} kWh</p>
+<p>Peak Usage: {{ peak_usage }} kWh</p>
+<p>Efficiency Score: {{ efficiency_score }}%</p>
+{% endblock %}
