@@ -17,6 +17,6 @@ Flask
 plotly
 dash
 
-
+gunicorn
 beautifulsoup4
 requests
