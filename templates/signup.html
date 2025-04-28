@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Sign Up</button>
+            <a href="https://wa.me/+263712118756?text=May%20I%20have%20authentication%20details">Sign up</a>
         </form>
         <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
         {% if messages %}
